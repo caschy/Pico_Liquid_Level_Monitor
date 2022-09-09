@@ -45,7 +45,7 @@ while True:
     led.reset()
     
     if (not low_sensor.value()):
-        if ((not mid_sensor.value()) and (not high_sensor.value())):
+        if ((not low_sensor.value()) and (not mid_sensor.value())):
             if (not high_sensor.value()):
                 led.set(LED_NUMBER=0, COLOR=led.BLUE, BRIGHTNESS=0.5)
                 new_reading = 65535
