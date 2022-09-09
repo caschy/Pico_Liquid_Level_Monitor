@@ -13,23 +13,25 @@ led = neopixel_rp2040.neopixel(LEDS=1, PIN=16)
 
 cur_reading = 0
 new_reading = 0
-step = -1
+
+''' 
+   Define sensors inputs
+'''
 low_sensor = Pin(18, Pin.IN, Pin.PULL_UP)
 mid_sensor = Pin(19, Pin.IN, Pin.PULL_UP)
 high_sensor = Pin(20, Pin.IN, Pin.PULL_UP)
+
+'''
+   Define Gauge PWM output and set freq to 1khz
+'''
 gauge = PWM(Pin(15))
 gauge.freq(1000)
 
+''' 
+   simple function to change gauge reading based upon passed parameter
+'''
 def sweep(reading):
-    if (cur_reading < reading):
-        for duty in range(reading,cur_reading):
-            gauge.duty_u16(duty)
-            sleep(0.01)
-    elif (cur_reading > reading):
-        for duty in range(cur_reading,reading,step):
-            gauge.duty_u16(duty)
-            sleep(0.01)
-    cur_reading = reading
+   gauge.duty_u16(reading)
     
 while True:
     '''pretty gauge sweep'''
